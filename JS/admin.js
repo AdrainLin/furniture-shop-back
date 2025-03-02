@@ -21,7 +21,15 @@ function getOrderList() {
     })
 }
 //--選染訂單表格--//
-function renderOrderList(orderData){
+function renderOrderList(orderData,sortby = "newest"){
+  
+  //判斷排序方式
+  if(sortby == "newest") {
+    orderData.sort((a,b) => b.createdAt - a.createdAt)
+  }else {
+    orderData.sort((b,a) => b.createdAt - a.createdAt)
+  }
+  
   orderList.innerHTML = orderData.map((item,index) => {
     let {user} = item
     //組時間字串,item.createdAt傳回只有10碼(秒),new Date要求13碼(毫秒)
@@ -103,13 +111,28 @@ function renderChar(orderData,chartType){
       columnsAry.push(['其它',otherTotal])
     }
   }
-  c3.generate({
+  let c = c3.generate({
     data: {
-      columns: columnsAry,
-      type : 'pie',
+      columns: [],
+      type: 'pie',
+    },
+    legend: {
+      position: 'bottom'
     }
   })
+  function animateChart(index) {
+    if (index >= columnsAry.length) return
+
+    setTimeout(() => {
+      c.load({
+        columns: [columnsAry[index]]
+      });
+      animateChart(index + 1)
+    }, 200);
+  }
+  animateChart(0)
 }
+//--圖表tabs切換--//
 const tabs = document.querySelector(".chart-tabs")
 tabs.addEventListener("click",e => {
   let target = e.target
@@ -185,3 +208,12 @@ function deleteOrderItem(id,delBtn){
     })
     
 }
+//--orderList排序切換--//
+const sortBtns = document.querySelectorAll(".sort-box button");
+sortBtns.forEach(btn => {
+  btn.addEventListener("click",function() {
+    document.querySelector(".sort-box button.active").classList.remove("active")
+    this.classList.add("active")
+    renderOrderList(orderData,this.dataset.sortby)
+  })
+})

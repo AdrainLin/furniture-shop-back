@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>窩窩居家-後台</title>
     <!-- Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <!-- CSS -->
@@ -50,8 +50,9 @@
       <p class="chart-text">訂單列表為空</p>
     </section>
     <section class="wrap order">
-      <div class="delAll-box">
-        <button class="delAll-orderBtn">清除全部訂單</button>
+      <div class="sort-box">
+        <button class="active" data-sortby="newest">按最新排序</button>
+        <button data-sortby="oldest">按最舊排序</button>
       </div>
       <table class="orderTable wrap">
         <thead>

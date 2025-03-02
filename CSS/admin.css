@@ -60,7 +60,8 @@ a {
   color: white;
   border-color: #6A33F8;
 }
-.chart-tab:hover:not(.disabled) {
+.chart-tab:hover:not(.disabled),
+.sort-box button:hover {
   filter: brightness(0.9);
 }
 /*orderTable表格區塊*/
@@ -118,22 +119,22 @@ td {
 .del-orderBtn:hover {
   opacity: .7;
 }
-.delAll-orderBtn {
+.sort-box button {
   border: 1px solid #000;
   background-color: #fff;
   padding: 10px 20px;
   margin-bottom: 12px;
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: bold;
   border-radius: 5px;
   margin-left: auto;
   transition: .2s;
+  cursor: pointer;
 }
-.delAll-orderBtn:hover {
+.sort-box button.active {
   background-color: #000;
   color: #fff;
 }
-.delAll-box{
+.sort-box{
   text-align: right;
 }
-/**/
